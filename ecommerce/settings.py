@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'cart',
     'wishlist',
     'orders',
+    'docs',
+    'drf_spectacular',
     'rest_framework',
     'corsheaders',
     'django_filters',
@@ -76,10 +78,6 @@ MIDDLEWARE = [
 ]
 
 
-REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
-}
-
 CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ALLOW_HEADERS=[
@@ -100,7 +98,9 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'http://localhost:8000',
     'https://checkout.stripe.com',
-    'https://checkout.stripe.com'
+    'https://checkout.stripe.com',
+    "http://127.0.0.1:5173",
+    "http://localhost:5173"
 ]
 CORS_ALLOWED_ORIGIN_REGEXES = [
     'http://localhost:3000',
@@ -189,9 +189,11 @@ cloudinary.config(
 )
 
 REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    ),
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
 SIMPLE_JWT = {

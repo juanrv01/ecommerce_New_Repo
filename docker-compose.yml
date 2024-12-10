@@ -1,6 +1,17 @@
-version: '3.9'
+version: "3.9"
 
 services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: ecommerce_final_db
+      POSTGRES_USER: this_user
+      POSTGRES_PASSWORD: ecommerce_123
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
   web:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
@@ -10,18 +21,6 @@ services:
       - "8000:8000"
     depends_on:
       - db
-
-  db:
-    image: postgres:16
-    container_name: postgres_db
-    environment:
-      POSTGRES_DB: ecommerce_final_db
-      POSTGRES_USER: this_user
-      POSTGRES_PASSWORD: ecommerce_123
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
 
 volumes:
   postgres_data:

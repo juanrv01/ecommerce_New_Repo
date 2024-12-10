@@ -2,7 +2,7 @@
 FROM python:3.9-slim
 
 # Establece el directorio de trabajo
-WORKDIR /app
+WORKDIR /usr/src/app
 
 # Copia los archivos de requisitos
 COPY requirements.txt .
@@ -12,6 +12,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copia el código de la aplicación
 COPY . .
+
+# Exponer el puerto 8000
+EXPOSE 8000
 
 # Comando de inicio
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
